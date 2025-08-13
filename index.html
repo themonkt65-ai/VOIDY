@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VOID Ultra Dashboard</title>
+  <link rel="icon" href="assets/icons/space/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+</head>
+<body>
+<!-- Name Prompt Overlay -->
+<div id="name-overlay" class="name-overlay" style="display:none;">
+  <div class="name-overlay-content">
+    <h2>Enter your name to enter VOID</h2>
+    <input type="text" id="user-name-input" maxlength="32" placeholder="Your name..." />
+    <button id="user-name-confirm">Enter</button>
+  </div>
+</div>
+
+<!-- Blocked Overlay -->
+<div id="blocked-overlay" class="blocked-overlay" style="display:none;">
+  <div class="blocked-overlay-content">
+    <h2>Access Blocked</h2>
+    <p id="blocked-message"></p>
+  </div>
+</div>
+
+<header class="top-bar">
+  <div class="top-logo-void">
+    <span class="orb"></span>
+    <span class="void-top-text">VOID</span>
+  </div>
+  <div class="topbar-dots-bar">
+    <div class="topbar-dots">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-button" id="btn-games" title="GAMES">GAMES</button>
+    <button class="nav-button" id="btn-apps" title="APPS">APPS</button>
+    <button class="nav-button" id="btn-media" title="MEDIA">MEDIA</button>
+    <button class="nav-button" id="btn-ai" title="AI">AI</button>
+    <button class="nav-button" id="btn-settings" title="SETTINGS">SETTINGS</button>
+  </nav>
+</header>
+
+<main class="main-content">
+  <section class="logo-section">
+    <div class="logo-text" style="display:flex;align-items:center;justify-content:center;">
+      <img src="assets/backgrounds/star.png" alt="Star" style="height:48px;vertical-align:middle;margin-right:16px;" />
+      <h1 class="void-title" style="display:inline-block;vertical-align:middle;">VOID</h1>
+      <div class="tagline" style="margin-left:12px;">Slip into the Void...</div>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <input type="text" id="url-input" placeholder="Enter URL or search to slip into the Void..." />
+    <button id="surf-btn">Surf</button>
+  </section>
+
+  <section class="quick-launch">
+    <div class="quick-icon" data-url="https://www.youtube.com/" title="YouTube">
+      <img src="assets/icons/space/youtube.png" alt="YouTube" />
+      <div class="quick-label">YouTube</div>
+    </div>
+    <div class="quick-icon" data-url="https://discord.com/" title="Discord">
+      <img src="assets/icons/space/discord.png" alt="Discord" />
+      <div class="quick-label">Discord</div>
+    </div>
+    <div class="quick-icon" data-url="https://www.roblox.com/" title="Roblox">
+      <img src="assets/icons/space/roblox.png" alt="Roblox" />
+      <div class="quick-label">Roblox</div>
+    </div>
+    <div class="quick-icon" data-url="https://www.twitch.tv/" title="Twitch">
+      <img src="assets/icons/space/twitch.png" alt="Twitch" />
+      <div class="quick-label">Twitch</div>
+    </div>
+  </section>
+
+  <div id="tiles-container"></div>
+
+  <!-- Fullscreen Game Overlay -->
+  <div id="game-fullscreen-overlay" style="display:none;">
+    <div class="game-fullscreen-bar">
+      <button id="close-game-fullscreen" class="close-btn" style="position:static;">✕</button>
+    </div>
+    <iframe id="game-fullscreen-frame" src="" frameborder="0" allowfullscreen></iframe>
+    <div class="game-fullscreen-tiles"></div>
+  </div>
+
+  <div id="iframe-container" style="width:100%;max-width:1100px;margin:30px auto 0;display:none;">
+    <button id="close-iframe" style="float:right;margin:8px 8px 0 0;padding:6px 16px;border-radius:8px;border:none;background:#222;color:#fff;cursor:pointer;">Close</button>
+    <iframe id="browser-frame" width="100%" height="600" frameborder="0" style="border-radius:12px;width:100%;"></iframe>
+  </div>
+
+  <!-- AI Chat Section -->
+  <div id="ai-section" style="display:none;">
+    <div class="ai-header">VOID AI</div>
+    <div id="ai-chat-window"></div>
+    <div class="ai-input-bar">
+      <input type="text" id="ai-input" placeholder="Ask VOID AI anything..." autocomplete="off" />
+      <button id="ai-send-btn">Send</button>
+    </div>
+  </div>
+
+  <!-- Settings Section -->
+  <div id="settings-section" style="display:none;">
+    <div class="section-page">
+      <h2>Settings</h2>
+      <div style="margin-bottom:18px;">
+        <label for="search-engine-select"><b>Search Engine:</b></label>
+        <select id="search-engine-select">
+          <option value="google">Google</option>
+          <option value="duckduckgo">DuckDuckGo</option>
+          <option value="bing">Bing</option>
+          <option value="yahoo">Yahoo</option>
+        </select>
+        <button id="save-search-engine-btn">Save</button>
+      </div>
+      <div style="margin-bottom:18px;">
+        <label for="bg-url-input"><b>Set Background Image</b></label>
+        <div style="margin-bottom:6px;font-size:13px;color:#bdf6ff;">Change the site's background image. Enter image URL.</div>
+        <input type="text" id="bg-url-input" placeholder="https://example.com/image.jpg" style="width:70%;" />
+        <button id="save-bg-btn">Save</button>
+        <button id="reset-bg-btn">Reset</button>
+      </div>
+      <div style="margin-bottom:18px;">
+        <button id="panic-btn" style="background:#cc0000;color:#fff;padding:12px 32px;border-radius:16px;font-size:18px;font-family:'Orbitron',sans-serif;font-weight:bold;cursor:pointer;">Panic Button (Close Tab)</button>
+      </div>
+      <div>
+        <label for="keybind-input"><b>Set Panic Key</b></label>
+        <div style="margin-bottom:6px;font-size:13px;color:#bdf6ff;">
+          Quick open another site with one press. Used for redirects when about:blank is opened.<br>
+          For multiple key strokes separate them with a comma. Ex. "A,B,C"
+        </div>
+        <input type="text" id="keybind-input" placeholder="A,B,C" style="width:120px;text-align:center;" />
+        <input type="text" id="panic-url-input" placeholder="https://classroom.google.com/" style="width:60%;" />
+        <button id="save-keybind-btn">Save</button>
+        <span id="keybind-status" style="margin-left:10px;color:#bdf6ff;font-size:14px;"></span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <button class="bottom-btn" id="stealth-btn"><span class="orb"></span>Stealth Mode</button>
+  <button class="bottom-btn" id="custom-cloak-btn"><span class="orb"></span>Custom Tab Cloak</button>
+  <button class="bottom-btn" id="wipe-btn">Wipe History</button>
+</footer>
+
+<!-- Admin Dot -->
+<div class="admin-dot" id="admin-dot" title="Admin Panel"></div>
+
+<!-- Admin Verify Popup -->
+<div id="admin-verify" class="admin-panel" style="display:none;">
+  <div class="admin-panel-content">
+    <h2>Admin Verification</h2>
+    <input type="text" id="admin-name-input" placeholder="Enter admin name" autocomplete="off" />
+    <button id="admin-verify-btn">Verify</button>
+    <button id="close-admin-verify" class="close-btn">✕</button>
+    <div id="admin-verify-log" style="margin-top:10px;color:#bdf6ff;font-size:14px;"></div>
+  </div>
+</div>
+
+<!-- Admin Panel Popup -->
+<div id="admin-panel" class="admin-panel" style="display:none;">
+  <div class="admin-panel-content">
+    <h2>Admin Panel</h2>
+    <div id="admin-users-list"></div>
+    <hr>
+    <label>Send troll message to user:</label>
+    <input type="text" id="troll-user-input" placeholder="Name" />
+    <input type="text" id="troll-message-input" placeholder="Troll message" />
+    <button id="send-troll-btn">Send</button>
+    <div id="admin-remove-admins" style="margin-top:18px;"></div>
+    <button id="close-admin-btn" class="close-btn">✕</button>
+    <div id="admin-panel-log" style="margin-top:10px;color:#bdf6ff;font-size:14px;"></div>
+  </div>
+</div>
+
+<div id="cloak-popup" class="cloak-popup" style="display:none;">
+  <div class="cloak-popup-content">
+    <div class="cloak-popup-title">Custom Tab Cloak</div>
+    <div class="cloak-popup-message">
+      Enter the URL for the icon you want.<br>
+      If you don't know how to get the icon of a website, try adding <b>/favicon.ico</b> at the end of the domain name (ex. example.com/favicon.ico):
+    </div>
+    <input type="text" id="custom-favicon-input" placeholder="https://example.com/favicon.ico" />
+    <button id="confirm-cloak-btn">Confirm</button>
+    <button id="close-cloak-btn" class="close-btn">✕</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "modules": [
+    {
+      "name": "VOID Surf",
+      "type": "iframe",
+      "url": "fallbacks/fallback.html",
+      "autoplay": false
+    },
+    {
+      "name": "VOID AI",
+      "type": "iframe",
+      "url": "https://youraiapp.com",
+      "autoplay": true
+    },
+    {
+      "name": "VOID Media",
+      "type": "iframe",
+      "url": "https://yourmedia.com",
+      "autoplay": false
+    }
+  ]
+}
